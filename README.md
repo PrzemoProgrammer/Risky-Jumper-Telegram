@@ -1,6 +1,6 @@
 <img align="right" alt="coding" src="https://i.ibb.co/Jxfw1z7/risky-Jumper-Web3-Icon.png" width="100" height="auto">
 
-# Web3 Game Risky Jumper
+# Telegram Game Risky Jumper
 
 - 𝗘𝘁𝗵𝗲𝗿𝗲𝘂𝗺, SepoliaTestnet,
 - 𝗠𝗲𝘁𝗮𝗠𝗮𝘀𝗸,
