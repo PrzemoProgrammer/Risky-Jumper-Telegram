@@ -29,7 +29,7 @@ class MenuScene extends Phaser.Scene {
     this.settingsButton = this.addSettingsButton();
     this.rankingButton = this.addRankingButton();
     this.achievementsButton = this.addAchievementsButton();
-    this.checkConnectionStatus();
+    // this.checkConnectionStatus();
     if (document.getElementById("loadingIcon"))
       document.getElementById("loadingIcon").remove();
   }
