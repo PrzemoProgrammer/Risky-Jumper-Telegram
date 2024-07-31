@@ -125,11 +125,16 @@ class LostScreen {
     const currentUrl = window.location.href;
     const currentUrlObject = new URL(currentUrl);
     const currentId = currentUrlObject.searchParams.get("id");
+    const currentType = currentUrlObject.searchParams.get("type");
 
     const dup = async () => {
       try {
         const message = await (
-          await UPDATE_SCORE({ score: this.score, id: currentId })
+          await UPDATE_SCORE({
+            score: this.score,
+            id: currentId,
+            type: currentType,
+          })
         ).json();
         // console.log(message);
       } catch (error) {
