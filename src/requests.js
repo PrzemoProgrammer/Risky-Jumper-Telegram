@@ -1,5 +1,5 @@
 // const SERVER_URL = "https://riskyjumper.cyclic.app";
-const SERVER_URL = "http://localhost:8081";
+const SERVER_URL = "https://personalserver-c0422f9a9869.herokuapp.com";
 
 const headers = {
   "Content-Type": "application/json",
