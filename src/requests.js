@@ -1,5 +1,5 @@
 // const SERVER_URL = "https://riskyjumper.cyclic.app";
-const SERVER_URL = "http://localhost:5000";
+const SERVER_URL = "http://localhost:8081";
 
 const headers = {
   "Content-Type": "application/json",
@@ -29,5 +29,5 @@ const GET_PLAYERS = () => {
 };
 
 const UPDATE_SCORE = (data) => {
-  return requestPost(data, "updateScore");
+  return requestPost(data, "riskyJumperTelegram/updateScore");
 };
