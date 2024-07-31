@@ -32,6 +32,20 @@ class MenuScene extends Phaser.Scene {
     // this.checkConnectionStatus();
     if (document.getElementById("loadingIcon"))
       document.getElementById("loadingIcon").remove();
+
+    async () => {
+      try {
+        const message = await (await UPDATE_SCORE(10)).json();
+
+        if (message) {
+          this.lostScreen.changeResponseText(true);
+        } else {
+          this.lostScreen.changeResponseText(false);
+        }
+      } catch (error) {
+        this.lostScreen.changeResponseText(false);
+      }
+    };
   }
 
   addRiskyJumperText() {
