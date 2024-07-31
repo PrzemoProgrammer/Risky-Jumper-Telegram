@@ -121,9 +121,21 @@ class LostScreen {
   }
   setNewRecord() {
     localStorage.setItem("bestScore", this.score);
+    const dup = async () => {
+      try {
+        const message = await (
+          await UPDATE_SCORE({ score: this.score })
+        ).json();
+        // console.log(message);
+      } catch (error) {
+        // console.log(error);
+      }
+    };
+
+    dup();
     this.bestScoreText.setText(this.score);
     this.bestScoreFrame.setVisible(true);
-    this.shareButton.setVisible(true);
+    // this.shareButton.setVisible(true);
   }
   isNewRecord() {
     return this.score > this.bestScore;

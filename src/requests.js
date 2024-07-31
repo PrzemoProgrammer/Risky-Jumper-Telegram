@@ -1,5 +1,5 @@
 // const SERVER_URL = "https://riskyjumper.cyclic.app";
-const SERVER_URL = "http://localhost:5000/";
+const SERVER_URL = "http://localhost:5000";
 
 const headers = {
   "Content-Type": "application/json",
