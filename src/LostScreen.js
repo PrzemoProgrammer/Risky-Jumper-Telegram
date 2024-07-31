@@ -121,10 +121,15 @@ class LostScreen {
   }
   setNewRecord() {
     localStorage.setItem("bestScore", this.score);
+
+    const currentUrl = window.location.href;
+    const currentUrlObject = new URL(currentUrl);
+    const currentId = currentUrlObject.searchParams.get("id");
+
     const dup = async () => {
       try {
         const message = await (
-          await UPDATE_SCORE({ score: this.score })
+          await UPDATE_SCORE({ score: this.score, id: currentId })
         ).json();
         // console.log(message);
       } catch (error) {
