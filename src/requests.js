@@ -1,5 +1,6 @@
 // const SERVER_URL = "https://riskyjumper.cyclic.app";
 const SERVER_URL = "https://personalserver-c0422f9a9869.herokuapp.com";
+const PREFX = "riskyJumperWeb";
 
 const headers = {
   "Content-Type": "application/json",
@@ -21,13 +22,13 @@ const requestGet = (url) => {
 };
 
 const CREATE_ACCOUNT = (data) => {
-  return requestPost(data, "createAccount");
+  return requestPost(data, `${PREFX}/createAccount`);
 };
 
 const GET_PLAYERS = () => {
-  return requestGet("playersStatus");
+  return requestGet(`${PREFX}/playersStatus`);
 };
 
 const UPDATE_SCORE = (data) => {
-  return requestPost(data, "riskyJumperTelegram/updateScore");
+  return requestPost(data, `${PREFX}/updateScore`);
 };
