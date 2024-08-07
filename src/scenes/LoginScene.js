@@ -33,15 +33,18 @@ class LoginScene extends Phaser.Scene {
       randomNumbers.push(Math.floor(Math.random() * 100));
     }
     const id = randomNumbers.join("");
-    localStorage.setItem("id", id);
+    // localStorage.setItem("id", id);
 
     return id;
   }
 
   async fetchData() {
+    console.log("NICKNAME FROM LOCALSTORAGE:");
+    console.log(localStorage.getItem("nickname"));
     if (localStorage.getItem("nickname")) {
       this.changeScene();
     } else {
+      console.log("TWORZY NOWE KONTO");
       localStorage.clear();
       const currentUrl = window.location.href;
       const currentUrlObject = new URL(currentUrl);
@@ -58,6 +61,7 @@ class LoginScene extends Phaser.Scene {
         console.log(respond);
         const { newNick, success } = respond;
         if (success) {
+          localStorage.setItem("id", this.id);
           localStorage.setItem("nickname", newNick);
           this.changeScene();
         } else {
