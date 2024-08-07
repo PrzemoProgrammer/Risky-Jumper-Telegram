@@ -61,6 +61,7 @@ class LoginScene extends Phaser.Scene {
         console.log(respond);
         const { newNick, success } = respond;
         if (success) {
+                 localStorage.setItem("skin_ID", 0);
           localStorage.setItem("id", this.id);
           localStorage.setItem("nickname", newNick);
           this.changeScene();
