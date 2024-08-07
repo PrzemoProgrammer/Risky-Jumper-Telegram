@@ -136,9 +136,9 @@ class LostScreen {
             type: currentType,
           })
         ).json();
-        // console.log(message);
+        console.log(message);
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
     };
 
