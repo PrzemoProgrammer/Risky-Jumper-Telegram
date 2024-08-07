@@ -163,13 +163,8 @@ class PreloadScene extends Phaser.Scene {
 
   handleNextScene() {
     localStorage.setItem("skin_ID", 0);
-    this.scene
-      .start("PlayScene")
-      .pause("PlayScene")
-      .start("BackgroundScene")
-      .start("LoginScene")
-      .swapPosition("PlayScene", "BackgroundScene")
-      .swapPosition("BackgroundScene", "LoginScene");
+    this.scene.start("LoginScene");
+
     // this.scene
     //   .start("PlayScene")
     //   .pause("PlayScene")
