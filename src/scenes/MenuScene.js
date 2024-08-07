@@ -32,7 +32,7 @@ class MenuScene extends Phaser.Scene {
     this.dailyReward = this.createDailyReward();
     //! /////////////////////////
     this.tonWalletsTemplate();
-    this.shareScoreTelegramButton();
+    // this.shareScoreTelegramButton = this.shareScoreTelegramButton();
     //! /////////////////////////
     //! WYŚWIETL NICK GRACZOWI
     this.fetchData();
@@ -55,22 +55,24 @@ class MenuScene extends Phaser.Scene {
   // ! //////////////////////////////////////
 
   // ! ////////// SHARE BUTTON //////////////////
-  shareScoreTelegramButton() {
-    const shareButton = new Button(
-      this,
-      halfGameWidth + 220,
-      halfGameHeight + halfGameHeight / 2,
-      "shareButton"
-    );
-    shareButton.onClick(() => {
-      console.log("clicked share button");
-      // TelegramGameProxy.shareScore();
-      window.parent.postMessage(
-        JSON.stringify({ eventType: "share_score", eventData: "33333" }),
-        "*"
-      );
-    });
-  }
+  // shareScoreTelegramButton() {
+  //   const shareButton = new Button(
+  //     this,
+  //     halfGameWidth + 220,
+  //     halfGameHeight + halfGameHeight / 2,
+  //     "shareButton"
+  //   ).setScale(0.7);
+  //   shareButton.onClick(() => {
+  //     console.log("clicked share button");
+  //     // TelegramGameProxy.shareScore();
+  //     window.parent.postMessage(
+  //       JSON.stringify({ eventType: "share_score", eventData: "33333" }),
+  //       "*"
+  //     );
+  //   });
+
+  //   return shareButton;
+  // }
   // ! //////////////////////////////////////
 
   // ! ///////// DAILY REWARD ///////////////
@@ -82,6 +84,7 @@ class MenuScene extends Phaser.Scene {
     );
     dailyReward.image.onClick(async () => {
       if (!this.dailyReward.isActive) return;
+      this.dailyReward.isActive = false;
       const data = {
         id: localStorage.getItem("id"),
         daily: true,
@@ -382,6 +385,13 @@ class MenuScene extends Phaser.Scene {
       ease: "Back.in",
       duration: 400,
       y: gameHeight + 200,
+    });
+
+    this.tweens.add({
+      targets: this.dailyReward,
+      ease: "Back.in",
+      duration: 450,
+      y: gameHeight,
     });
 
     this.tweens.add({

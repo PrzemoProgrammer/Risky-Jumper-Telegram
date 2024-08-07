@@ -39,39 +39,32 @@ class LoginScene extends Phaser.Scene {
   }
 
   async fetchData() {
-    console.log("NICKNAME FROM LOCALSTORAGE:");
-    console.log(localStorage.getItem("nickname"));
-    if (localStorage.getItem("nickname")) {
-      this.changeScene();
-    } else {
-      console.log("TWORZY NOWE KONTO");
-      localStorage.clear();
-      const currentUrl = window.location.href;
-      const currentUrlObject = new URL(currentUrl);
-      const username = currentUrlObject.searchParams.get("username");
+    const currentUrl = window.location.href;
+    const currentUrlObject = new URL(currentUrl);
+    const username = currentUrlObject.searchParams.get("username");
+    const currentId = currentUrlObject.searchParams.get("id");
 
-      const data = {
-        nick: username || "Guest",
-        id: this.id,
-        telegram: true,
-      };
+    const data = {
+      nick: username || "Guest",
+      id: currentId,
+      telegram: true,
+    };
 
-      try {
-        const respond = await (await CREATE_ACCOUNT(data)).json();
-        console.log(respond);
-        const { newNick, success } = respond;
-        if (success) {
-                 localStorage.setItem("skin_ID", 0);
-          localStorage.setItem("id", this.id);
-          localStorage.setItem("nickname", newNick);
-          this.changeScene();
-        } else {
-          //CAN ADD ERROR AND NOT CHANGE SCENE
-          this.changeScene();
-        }
-      } catch (error) {
+    try {
+      const respond = await (await CREATE_ACCOUNT(data)).json();
+      console.log(respond);
+      const { newNick, success } = respond;
+      if (success) {
+        // localStorage.setItem("skin_ID", 0);
+        localStorage.setItem("id", currentId);
+        localStorage.setItem("nickname", newNick);
+        this.changeScene();
+      } else {
+        //CAN ADD ERROR AND NOT CHANGE SCENE
         this.changeScene();
       }
+    } catch (error) {
+      this.changeScene();
     }
   }
 
