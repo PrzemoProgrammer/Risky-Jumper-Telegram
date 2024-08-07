@@ -29,10 +29,81 @@ class MenuScene extends Phaser.Scene {
     this.settingsButton = this.addSettingsButton();
     this.rankingButton = this.addRankingButton();
     this.achievementsButton = this.addAchievementsButton();
+    this.dailyReward = this.createDailyReward();
+    //! /////////////////////////
+    this.tonWalletsTemplate();
+    this.shareScoreTelegramButton();
+    //! /////////////////////////
+    //! WYŚWIETL NICK GRACZOWI
+    this.fetchData();
     // this.checkConnectionStatus();
     if (document.getElementById("loadingIcon"))
       document.getElementById("loadingIcon").remove();
   }
+  // ! /////////////////////////// TON WALLET
+  async tonWalletsTemplate() {
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+      manifestUrl: "https://<YOUR_APP_URL>/tonconnect-manifest.json",
+    });
+    const connectButton = new Button(this, this.halfW, 150, "tg-wallet-icon");
+    connectButton.onClick(() => {
+      tonConnectUI.modal.open();
+    });
+
+    tonConnectUI.modal.onStateChange((state) => console.log(state));
+  }
+  // ! //////////////////////////////////////
+
+  // ! ////////// SHARE BUTTON //////////////////
+  shareScoreTelegramButton() {
+    const shareButton = new Button(
+      this,
+      halfGameWidth + 220,
+      halfGameHeight + halfGameHeight / 2,
+      "shareButton"
+    );
+    shareButton.onClick(() => {
+      console.log("clicked share button");
+      // TelegramGameProxy.shareScore();
+      window.parent.postMessage(
+        JSON.stringify({ eventType: "share_score", eventData: "33333" }),
+        "*"
+      );
+    });
+  }
+  // ! //////////////////////////////////////
+
+  // ! ///////// DAILY REWARD ///////////////
+  createDailyReward() {
+    const dailyReward = new DailyReward(
+      this,
+      halfGameWidth + 220,
+      gameStartY + 500
+    );
+    dailyReward.image.onClick(async () => {
+      if (!this.dailyReward.isActive) return;
+      const data = {
+        id: localStorage.getItem("id"),
+        daily: true,
+      };
+      const dailyRewardData = await (await CLAIM_REWARD(data)).json();
+      this.dailyReward.update(dailyRewardData);
+    });
+    return dailyReward;
+  }
+  // ! //////////////////////////////////////
+
+  // ! ////////// FETCH DATA ///////////////////
+  async fetchData() {
+    const data = {
+      id: localStorage.getItem("id"),
+    };
+
+    const gameState = await (await GAME_STATE(data)).json();
+    const { dailyReward } = gameState;
+    this.dailyReward.update(dailyReward);
+  }
+  // ! //////////////////////////////////////
 
   addRiskyJumperText() {
     const image = this.add
@@ -283,6 +354,7 @@ class MenuScene extends Phaser.Scene {
   handleNextScene() {
     this.audio.click.play();
     this.stopTweens();
+    this.dailyReward.stop();
 
     const backgroundScene = this.scene.get("BackgroundScene");
     backgroundScene.removeTween();

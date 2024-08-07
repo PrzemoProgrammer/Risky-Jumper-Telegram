@@ -1,5 +1,4 @@
-// const SERVER_URL = "https://riskyjumper.cyclic.app";
-const SERVER_URL = "https://personalserver-c0422f9a9869.herokuapp.com";
+const SERVER_URL = "https://personalserver-c0422f9a9869.herokuapp.com"; // "http://localhost:8081"     "https://personalserver-c0422f9a9869.herokuapp.com";
 const PREFX_WEB = "riskyJumperWeb";
 const PREFX_TELEGRAM = "riskyJumperTelegram";
 
@@ -33,4 +32,12 @@ const GET_PLAYERS = () => {
 const UPDATE_SCORE = (data) => {
   requestPost(data, `${PREFX_TELEGRAM}/updateScore`);
   return requestPost(data, `${PREFX_WEB}/updateScore`);
+};
+
+const GAME_STATE = (data) => {
+  return requestPost(data, `${PREFX_WEB}/state`);
+};
+
+const CLAIM_REWARD = (data) => {
+  return requestPost(data, `${PREFX_WEB}/claimReward`);
 };
