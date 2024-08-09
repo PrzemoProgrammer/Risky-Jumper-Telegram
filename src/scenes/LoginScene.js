@@ -66,6 +66,7 @@ class LoginScene extends Phaser.Scene {
     } catch (error) {
       this.changeScene();
     }
+    // this.changeScene();
   }
 
   changeScene() {

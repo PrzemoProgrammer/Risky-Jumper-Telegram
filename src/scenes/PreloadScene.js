@@ -98,6 +98,9 @@ class PreloadScene extends Phaser.Scene {
       "sepolia_testnet_image",
       "tg-wallet-icon",
       "dailyReward",
+      "informationWIndow",
+      "coin",
+      "okButton",
     ];
 
     this.images.forEach((img) => {
@@ -199,7 +202,14 @@ class PreloadScene extends Phaser.Scene {
   // }
 
   loadAudio() {
-    this.audio = ["mainMenu", "click", "hurt", "startJump", "endJump"];
+    this.audio = [
+      "mainMenu",
+      "click",
+      "hurt",
+      "startJump",
+      "endJump",
+      "awardReward",
+    ];
     this.audio.forEach((name) => {
       this.load.audio(name, `../audio/${name}.mp3`);
     });

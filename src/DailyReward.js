@@ -4,9 +4,10 @@ class DailyReward extends Phaser.GameObjects.Container {
     scene.add.existing(this);
     this.scene = scene;
 
+    this.pulseTween = null;
+    this.timeToRenew = 23 * 59 * 59 * 1000;
     this.isActive = false;
     this.countDownInterval = null;
-    this.pulseTween = null;
 
     this.image = this.createImage();
     this.countdownText = this.createCountdownText();
@@ -21,7 +22,7 @@ class DailyReward extends Phaser.GameObjects.Container {
   createCountdownText() {
     const text = this.scene.add
       .text(0, 67, "...", {
-        fontSize: "17px",
+        fontSize: "30px",
         fill: "#fff",
       })
       .setOrigin(0.5, 0.5);
@@ -32,8 +33,8 @@ class DailyReward extends Phaser.GameObjects.Container {
   setState(value) {
     if (value) {
       this.image.setAlpha(1);
+      if (!this.isActive) this.startPulseTweenAnimation();
       this.isActive = true;
-      this.startPulseTweenAnimation();
     } else {
       this.image.setAlpha(0.5);
       this.isActive = false;
@@ -41,6 +42,12 @@ class DailyReward extends Phaser.GameObjects.Container {
       this.pulseTween = null;
       this.image.scaleX = 1;
       this.image.scaleY = 1;
+      if (this.isActive)
+        this.update({
+          dailyClaimTIme: this.timeToRenew,
+          success: false,
+          canClaim: false,
+        });
     }
   }
 
