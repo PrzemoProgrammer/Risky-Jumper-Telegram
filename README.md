@@ -9,6 +9,6 @@
 - 𝗘𝘅𝗽𝗿𝗲𝘀𝘀.𝗷𝘀,
 - 𝗠𝗼𝗻𝗴𝗼𝗱𝗯 database
 
-Check live: t.me/RiskyJumperBot?game=RiskyJumper
+Check live: https://t.me/RiskyJumperBot?game=RiskyJumper
 
 <img align="right" alt="coding" src="https://i.ytimg.com/vi/zPRiNFE4dPk/maxresdefault.jpg">
